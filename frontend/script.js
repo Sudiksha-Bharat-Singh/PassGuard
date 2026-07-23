@@ -285,24 +285,41 @@ document.addEventListener('DOMContentLoaded', () => {
         checklistCountBadge.textContent = `${passedCount} / 7 Met`;
 
         // 5. Policy Card
+        const pwLength = (passwordInput.value || '').length;
         const minLenPassed = data.checklist.min_length;
-        const casingPassed = data.checklist.uppercase && data.checklist.lowercase;
-        const charsPassed = data.checklist.numbers && data.checklist.special_chars;
-        const safetyPassed = data.checklist.no_common && data.checklist.no_repeated;
+        const recLenPassed = pwLength >= 12;
+        const upperPassed = data.checklist.uppercase;
+        const lowerPassed = data.checklist.lowercase;
+        const numPassed = data.checklist.numbers;
+        const specPassed = data.checklist.special_chars;
+        const commonPassed = data.checklist.no_common;
+        const repeatPassed = data.checklist.no_repeated;
 
         policyLen.textContent = minLenPassed ? 'Yes' : 'No';
         policyLen.className = `policy-state ${minLenPassed ? 'pass' : 'fail'}`;
 
-        policyCasing.textContent = casingPassed ? 'Yes' : 'No';
-        policyCasing.className = `policy-state ${casingPassed ? 'pass' : 'fail'}`;
+        policyRecLen.textContent = recLenPassed ? 'Yes' : 'No';
+        policyRecLen.className = `policy-state ${recLenPassed ? 'pass' : 'fail'}`;
 
-        policyChars.textContent = charsPassed ? 'Yes' : 'No';
-        policyChars.className = `policy-state ${charsPassed ? 'pass' : 'fail'}`;
+        policyUpper.textContent = upperPassed ? 'Yes' : 'No';
+        policyUpper.className = `policy-state ${upperPassed ? 'pass' : 'fail'}`;
 
-        policySafety.textContent = safetyPassed ? 'Yes' : 'No';
-        policySafety.className = `policy-state ${safetyPassed ? 'pass' : 'fail'}`;
+        policyLower.textContent = lowerPassed ? 'Yes' : 'No';
+        policyLower.className = `policy-state ${lowerPassed ? 'pass' : 'fail'}`;
 
-        const overallPolicyPass = minLenPassed && casingPassed && charsPassed && safetyPassed;
+        policyNum.textContent = numPassed ? 'Yes' : 'No';
+        policyNum.className = `policy-state ${numPassed ? 'pass' : 'fail'}`;
+
+        policySpec.textContent = specPassed ? 'Yes' : 'No';
+        policySpec.className = `policy-state ${specPassed ? 'pass' : 'fail'}`;
+
+        policyCommon.textContent = commonPassed ? 'Yes' : 'No';
+        policyCommon.className = `policy-state ${commonPassed ? 'pass' : 'fail'}`;
+
+        policyRepeated.textContent = repeatPassed ? 'Yes' : 'No';
+        policyRepeated.className = `policy-state ${repeatPassed ? 'pass' : 'fail'}`;
+
+        const overallPolicyPass = minLenPassed && upperPassed && lowerPassed && numPassed && specPassed && commonPassed && repeatPassed;
         policyStatusBadge.textContent = overallPolicyPass ? 'POLICY PASS' : 'POLICY FAIL';
         policyStatusBadge.className = `header-status-tag ${overallPolicyPass ? 'tag-pass' : 'tag-fail'}`;
 
@@ -335,6 +352,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasLower = /[a-z]/.test(pw);
         const hasNum = /[0-9]/.test(pw);
         const hasSpec = /[^A-Za-z0-9]/.test(pw);
+
+        checklistItems.min_length.classList.toggle('passed', len >= 8);
+        checklistItems.uppercase.classList.toggle('passed', hasUpper);
+        checklistItems.lowercase.classList.toggle('passed', hasLower);
+        checklistItems.numbers.classList.toggle('passed', hasNum);
+        checklistItems.special_chars.classList.toggle('passed', hasSpec);
 
         lengthMetricValue.textContent = `${len} Chars`;
         diversityMetricValue.textContent = `${uniqueCount} Unique`;

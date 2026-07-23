@@ -11,11 +11,17 @@ PassGuard is a modern cybersecurity web application designed to evaluate passwor
 - **Real-Time Password Analysis**: Evaluates password input dynamically with 0ms UI latency.
 - **100-Point Scoring Engine**: Evaluates length, character variety, entropy, sequential walks, and common dictionary patterns.
 - **Estimated Crack Time Calculation**: Computes time required for brute-force attacks based on mathematical entropy.
-- **Interactive Security Checklist**: Checks minimum length, uppercase, lowercase, numbers, special symbols, dictionary words, and repeated characters.
+- **Interactive Security Checklist**: Checks minimum length (8 characters required, 12+ recommended), uppercase, lowercase, numbers, special symbols, dictionary words, and repeated characters.
 - **Intelligent Recommendation Engine**: Generates real-time suggestions to strengthen passwords.
-- **Secure Password Generator**: Generates high-entropy random passwords (12–20 characters).
+- **Secure Password Generator**: Generates high-entropy random passwords (8–20 characters).
 - **Privacy-Preserving SHA-256 History**: Logs cryptographic SHA-256 hashes only (never plaintext passwords) and flags re-analyzed passwords.
 - **Dark Glassmorphism Interface**: Designed with frosted panels, glowing border highlights, and smooth animations.
+
+---
+
+## 🔒 Password Security Policy
+- **Minimum Required Length**: 8 Characters
+- **Recommended Best Practice**: 12+ Characters
 
 ---
 
