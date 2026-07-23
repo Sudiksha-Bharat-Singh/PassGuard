@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PassGuard - Premium Password Strength Analyzer</title>
+    <title>PassGuard - AI-Powered Password Security Analyzer</title>
     
-    <!-- Google Fonts: Poppins -->
+    <!-- Google Fonts: Poppins & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -16,118 +16,175 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Background Ambient Glow Effects -->
-    <div class="glow-sphere sphere-1"></div>
-    <div class="glow-sphere sphere-2"></div>
-    <div class="cyber-grid"></div>
+
+    <!-- Ambient Cybersecurity Background -->
+    <div class="cyber-background">
+        <div class="aurora-glow"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+        <div class="particles-overlay"></div>
+        <div class="cyber-grid-mesh"></div>
+    </div>
 
     <!-- Application Shell -->
-    <div class="app-container">
+    <div class="app-wrapper">
         
-        <!-- Header -->
-        <header class="app-header">
-            <div class="brand">
-                <div class="brand-icon">
-                    <i data-lucide="shield-check"></i>
+        <!-- Sticky Navigation Bar -->
+        <header class="navbar-glass">
+            <div class="nav-container">
+                <div class="brand-group">
+                    <div class="brand-logo-shield">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <div class="brand-info">
+                        <span class="brand-title">PassGuard</span>
+                        <span class="brand-pill">
+                            <span class="pulse-dot"></span>
+                            AI SECURITY
+                        </span>
+                    </div>
                 </div>
-                <div class="brand-text">
-                    <span class="brand-name">PassGuard</span>
-                    <span class="brand-badge">PRO ANALYZER</span>
+
+                <div class="nav-actions">
+                    <button id="historyBtn" class="glass-btn nav-btn" aria-label="Open Analysis History">
+                        <i data-lucide="history"></i>
+                        <span>Analysis History</span>
+                        <span id="historyCountBadge" class="count-badge">0</span>
+                    </button>
+                    
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="glass-btn nav-btn icon-only" aria-label="GitHub Repository">
+                        <i data-lucide="github"></i>
+                    </a>
+
+                    <div class="theme-indicator-pill">
+                        <i data-lucide="moon"></i>
+                        <span>Cyber Dark</span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="header-actions">
-                <button id="historyBtn" class="glass-btn btn-secondary">
-                    <i data-lucide="history"></i>
-                    <span>Analysis History</span>
-                </button>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
+        <!-- Main Dashboard Body -->
+        <main class="dashboard-main">
             
             <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="tagline-pill">
-                    <i data-lucide="lock"></i>
-                    <span>Analyze. Strengthen. Secure.</span>
+            <section class="hero-container">
+                <div class="floating-hero-badges">
+                    <span class="hero-badge badge-1"><i data-lucide="lock"></i> 256-Bit Entropy</span>
+                    <span class="hero-badge badge-2"><i data-lucide="shield-alert"></i> Zero-Knowledge Log</span>
+                    <span class="hero-badge badge-3"><i data-lucide="sparkles"></i> Heuristic AI</span>
                 </div>
-                <h1 class="hero-title">PassGuard</h1>
-                <p class="hero-subtitle">Analyze your password before hackers do.</p>
+
+                <div class="hero-shield-wrapper">
+                    <div class="shield-aura"></div>
+                    <div class="hero-shield-icon">
+                        <i data-lucide="shield"></i>
+                        <i data-lucide="key-round" class="shield-inner-icon"></i>
+                    </div>
+                </div>
+
+                <h1 class="hero-headline">PassGuard</h1>
+                <p class="hero-subheading">AI-Powered Password Security Analyzer</p>
+                <p class="hero-description">
+                    Analyze your passwords using entropy analysis, security heuristics, and intelligent recommendations before hackers can crack them.
+                </p>
+
+                <div class="hero-cta-group">
+                    <button id="heroAnalyzeBtn" class="hero-btn btn-primary-glow">
+                        <i data-lucide="scan-eye"></i>
+                        <span>Analyze Password</span>
+                    </button>
+                    <button id="heroGenerateBtn" class="hero-btn btn-glass-glow">
+                        <i data-lucide="wand-2"></i>
+                        <span>Generate Password</span>
+                    </button>
+                </div>
             </section>
 
-            <!-- Main Analyzer Card -->
-            <section class="glass-card main-analyzer-card">
+            <!-- Password Input Capsule Card -->
+            <section class="glass-panel input-capsule-panel" id="inputSection">
                 
-                <!-- Re-analyzed Alert Banner -->
-                <div id="reanalyzedBanner" class="banner banner-warning hidden">
-                    <i data-lucide="alert-triangle"></i>
-                    <span>This password has been analyzed previously.</span>
+                <!-- Previously Analyzed Alert Banner -->
+                <div id="reanalyzedBanner" class="alert-banner warning-banner hidden">
+                    <div class="banner-icon">
+                        <i data-lucide="alert-triangle"></i>
+                    </div>
+                    <div class="banner-text">
+                        <strong>Security Notice:</strong> This password has been analyzed previously in history.
+                    </div>
                 </div>
 
-                <!-- Input Group -->
-                <div class="input-wrapper">
-                    <label for="passwordInput" class="input-label">Enter Password to Analyze</label>
-                    <div class="input-container">
-                        <i data-lucide="key-round" class="input-icon"></i>
+                <div class="capsule-field-wrapper">
+                    <label for="passwordInput" class="capsule-label">
+                        <span>Enter Password to Analyze</span>
+                        <span class="capsule-hint"><i data-lucide="shield-off"></i> Client-Side Evaluated</span>
+                    </label>
+
+                    <div class="capsule-input-group">
+                        <div class="capsule-leading-icon">
+                            <i data-lucide="key"></i>
+                        </div>
+                        
                         <input 
                             type="password" 
                             id="passwordInput" 
-                            placeholder="Type or paste your password..." 
+                            placeholder="Type or paste a password to inspect security..." 
                             autocomplete="off" 
                             spellcheck="false"
+                            aria-label="Password Input"
                         >
-                        <button type="button" id="togglePasswordBtn" class="icon-btn" title="Show / Hide Password">
-                            <i data-lucide="eye" id="eyeIcon"></i>
-                        </button>
-                        <button type="button" id="copyInputBtn" class="icon-btn" title="Copy Password">
-                            <i data-lucide="copy"></i>
-                        </button>
+
+                        <div class="capsule-actions">
+                            <button type="button" id="togglePasswordBtn" class="capsule-btn" title="Show / Hide Password" aria-label="Show or hide password">
+                                <i data-lucide="eye" id="eyeIcon"></i>
+                            </button>
+                            <button type="button" id="pasteBtn" class="capsule-btn" title="Paste from Clipboard" aria-label="Paste password">
+                                <i data-lucide="clipboard-paste"></i>
+                            </button>
+                            <button type="button" id="copyInputBtn" class="capsule-btn" title="Copy Password" aria-label="Copy password">
+                                <i data-lucide="copy"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Strength Meter Bar -->
-                <div class="strength-meter-section">
-                    <div class="strength-header">
-                        <div class="strength-label-group">
-                            <span class="meta-title">Security Level:</span>
-                            <span id="strengthLabel" class="strength-badge weak">Weak</span>
-                        </div>
-                        <div class="strength-score-group">
-                            <span class="meta-title">Score:</span>
-                            <span id="scoreValue" class="score-number">0</span>
-                            <span class="score-max">/100</span>
-                        </div>
-                    </div>
+                <!-- Animated Strength Gauge & Dashboard Status -->
+                <div class="score-dashboard-grid">
                     
-                    <div class="meter-track">
-                        <div id="meterFill" class="meter-fill weak" style="width: 0%;"></div>
-                    </div>
-                </div>
-
-                <!-- Metrics Dashboard Grid -->
-                <div class="metrics-grid">
-                    
-                    <!-- Crack Time Card -->
-                    <div class="metric-card">
-                        <div class="metric-icon crack-icon">
-                            <i data-lucide="clock"></i>
+                    <!-- Circular Score Ring Card -->
+                    <div class="circular-score-card">
+                        <div class="gauge-ring-container">
+                            <svg class="score-ring-svg" viewBox="0 0 120 120">
+                                <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+                                <circle id="scoreRing" class="ring-fill weak" cx="60" cy="60" r="52" stroke-dasharray="326.72" stroke-dashoffset="326.72"></circle>
+                            </svg>
+                            <div class="score-inner-content">
+                                <span id="scoreValue" class="score-big-number">0</span>
+                                <span class="score-denom">/ 100</span>
+                            </div>
                         </div>
-                        <div class="metric-info">
-                            <span class="metric-label">Estimated Crack Time</span>
-                            <span id="crackTimeValue" class="metric-value">Instant</span>
+                        <div class="gauge-labels">
+                            <span id="strengthLabel" class="security-badge weak-badge">Weak</span>
+                            <span id="statusBadge" class="status-pill status-risk">AT RISK</span>
                         </div>
                     </div>
 
-                    <!-- Entropy Card -->
-                    <div class="metric-card">
-                        <div class="metric-icon entropy-icon">
-                            <i data-lucide="cpu"></i>
+                    <!-- Progress Bar Component -->
+                    <div class="linear-meter-card">
+                        <div class="meter-meta">
+                            <span class="meta-label"><i data-lucide="gauge"></i> Security Level</span>
+                            <span id="meterPercentText" class="meta-value">0% Score</span>
                         </div>
-                        <div class="metric-info">
-                            <span class="metric-label">Entropy Score</span>
-                            <span id="entropyValue" class="metric-value">0.0 bits</span>
+                        <div class="meter-track-glass">
+                            <div id="meterFill" class="meter-fill-bar weak" style="width: 0%;"></div>
+                        </div>
+                        <div class="meter-ticks">
+                            <span>0</span>
+                            <span>Weak (40)</span>
+                            <span>Medium (65)</span>
+                            <span>Strong (85)</span>
+                            <span>100</span>
                         </div>
                     </div>
 
@@ -135,118 +192,351 @@
 
             </section>
 
-            <!-- Grid Layout for Checklist & Generator -->
-            <div class="two-column-grid">
+            <!-- 4-Grid Premium Metrics -->
+            <section class="metrics-dashboard-grid">
                 
-                <!-- Security Checklist Card -->
-                <section class="glass-card checklist-card">
-                    <div class="card-header">
-                        <i data-lucide="list-checks" class="card-header-icon"></i>
-                        <h2>Security Checklist</h2>
+                <!-- Metric 1: Crack Time -->
+                <div class="glass-card metric-glass-card">
+                    <div class="metric-card-header">
+                        <div class="metric-icon-box crack-box">
+                            <i data-lucide="shield"></i>
+                        </div>
+                        <span class="metric-trend-badge">Brute Force</span>
                     </div>
-                    <ul class="checklist-list">
-                        <li id="check-length" class="check-item">
-                            <i data-lucide="circle" class="check-icon"></i>
-                            <span>Minimum 12 Characters</span>
-                        </li>
-                        <li id="check-upper" class="check-item">
-                            <i data-lucide="circle" class="check-icon"></i>
-                            <span>Uppercase Letters (A-Z)</span>
-                        </li>
-                        <li id="check-lower" class="check-item">
-                            <i data-lucide="circle" class="check-icon"></i>
-                            <span>Lowercase Letters (a-z)</span>
-                        </li>
-                        <li id="check-number" class="check-item">
-                            <i data-lucide="circle" class="check-icon"></i>
-                            <span>Numeric Digits (0-9)</span>
-                        </li>
-                        <li id="check-special" class="check-item">
-                            <i data-lucide="circle" class="check-icon"></i>
-                            <span>Special Characters (!@#$)</span>
-                        </li>
-                        <li id="check-common" class="check-item">
-                            <i data-lucide="circle" class="check-icon"></i>
-                            <span>No Common Password Pattern</span>
-                        </li>
-                        <li id="check-repeated" class="check-item">
-                            <i data-lucide="circle" class="check-icon"></i>
-                            <span>No Repeated Characters</span>
-                        </li>
-                    </ul>
-                </section>
+                    <div class="metric-card-body">
+                        <span class="metric-title">Estimated Crack Time</span>
+                        <span id="crackTimeValue" class="metric-hero-value">Instant</span>
+                    </div>
+                </div>
 
-                <!-- Dynamic Suggestions & Generator Card -->
-                <section class="glass-card action-card">
+                <!-- Metric 2: Entropy -->
+                <div class="glass-card metric-glass-card">
+                    <div class="metric-card-header">
+                        <div class="metric-icon-box cpu-box">
+                            <i data-lucide="cpu"></i>
+                        </div>
+                        <span class="metric-trend-badge">Bit Strength</span>
+                    </div>
+                    <div class="metric-card-body">
+                        <span class="metric-title">Entropy Score</span>
+                        <span id="entropyValue" class="metric-hero-value">0.0 bits</span>
+                    </div>
+                </div>
+
+                <!-- Metric 3: Password Length -->
+                <div class="glass-card metric-glass-card">
+                    <div class="metric-card-header">
+                        <div class="metric-icon-box length-box">
+                            <i data-lucide="ruler"></i>
+                        </div>
+                        <span class="metric-trend-badge">Character Length</span>
+                    </div>
+                    <div class="metric-card-body">
+                        <span class="metric-title">Password Length</span>
+                        <span id="lengthMetricValue" class="metric-hero-value">0 Chars</span>
+                    </div>
+                </div>
+
+                <!-- Metric 4: Character Diversity -->
+                <div class="glass-card metric-glass-card">
+                    <div class="metric-card-header">
+                        <div class="metric-icon-box spark-box">
+                            <i data-lucide="sparkles"></i>
+                        </div>
+                        <span class="metric-trend-badge">Pool Diversity</span>
+                    </div>
+                    <div class="metric-card-body">
+                        <span class="metric-title">Unique Characters</span>
+                        <span id="diversityMetricValue" class="metric-hero-value">0 Unique</span>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Two-Column Deep Inspection Area -->
+            <div class="inspection-two-column">
+                
+                <!-- Left Column: Checklist & Policy Compliance -->
+                <div class="column-stack">
                     
-                    <!-- Suggestions Panel -->
-                    <div class="suggestions-container">
-                        <div class="card-header">
-                            <i data-lucide="sparkles" class="card-header-icon"></i>
-                            <h2>Recommendations</h2>
-                        </div>
-                        <div id="suggestionsList" class="suggestions-list">
-                            <p class="suggestion-placeholder">Type a password above to receive intelligent recommendations.</p>
-                        </div>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <!-- Password Generator -->
-                    <div class="generator-container">
-                        <div class="card-header">
-                            <i data-lucide="refresh-cw" class="card-header-icon"></i>
-                            <h2>Password Generator</h2>
-                        </div>
-                        
-                        <div class="slider-control">
-                            <div class="slider-header">
-                                <label for="lengthSlider">Length:</label>
-                                <span id="lengthDisplay" class="length-badge">16 chars</span>
+                    <!-- Checklist Card -->
+                    <section class="glass-card panel-card">
+                        <div class="panel-header">
+                            <div class="panel-title-group">
+                                <div class="header-icon-pill">
+                                    <i data-lucide="list-checks"></i>
+                                </div>
+                                <h2>Security Checklist</h2>
                             </div>
-                            <input type="range" id="lengthSlider" min="12" max="20" value="16" class="glass-slider">
+                            <span id="checklistCountBadge" class="header-status-tag">0 / 7 Met</span>
                         </div>
 
-                        <button id="generateBtn" class="glass-btn btn-primary btn-block">
-                            <i data-lucide="wand-2"></i>
-                            <span>Generate Secure Password</span>
-                        </button>
-                    </div>
+                        <div class="checklist-grid">
+                            <div id="check-length" class="checklist-card-item">
+                                <div class="check-item-icon">
+                                    <i data-lucide="circle"></i>
+                                </div>
+                                <div class="check-item-content">
+                                    <span class="check-item-title">Minimum Length</span>
+                                    <span class="check-item-desc">At least 12 characters long</span>
+                                </div>
+                            </div>
 
-                </section>
+                            <div id="check-upper" class="checklist-card-item">
+                                <div class="check-item-icon">
+                                    <i data-lucide="circle"></i>
+                                </div>
+                                <div class="check-item-content">
+                                    <span class="check-item-title">Uppercase Characters</span>
+                                    <span class="check-item-desc">Includes A-Z uppercase letters</span>
+                                </div>
+                            </div>
+
+                            <div id="check-lower" class="checklist-card-item">
+                                <div class="check-item-icon">
+                                    <i data-lucide="circle"></i>
+                                </div>
+                                <div class="check-item-content">
+                                    <span class="check-item-title">Lowercase Characters</span>
+                                    <span class="check-item-desc">Includes a-z lowercase letters</span>
+                                </div>
+                            </div>
+
+                            <div id="check-number" class="checklist-card-item">
+                                <div class="check-item-icon">
+                                    <i data-lucide="circle"></i>
+                                </div>
+                                <div class="check-item-content">
+                                    <span class="check-item-title">Numeric Digits</span>
+                                    <span class="check-item-desc">Includes 0-9 digits</span>
+                                </div>
+                            </div>
+
+                            <div id="check-special" class="checklist-card-item">
+                                <div class="check-item-icon">
+                                    <i data-lucide="circle"></i>
+                                </div>
+                                <div class="check-item-content">
+                                    <span class="check-item-title">Special Characters</span>
+                                    <span class="check-item-desc">Includes symbols (!@#$%)</span>
+                                </div>
+                            </div>
+
+                            <div id="check-common" class="checklist-card-item">
+                                <div class="check-item-icon">
+                                    <i data-lucide="circle"></i>
+                                </div>
+                                <div class="check-item-content">
+                                    <span class="check-item-title">No Common Password</span>
+                                    <span class="check-item-desc">Not in dictionary blacklists</span>
+                                </div>
+                            </div>
+
+                            <div id="check-repeated" class="checklist-card-item">
+                                <div class="check-item-icon">
+                                    <i data-lucide="circle"></i>
+                                </div>
+                                <div class="check-item-content">
+                                    <span class="check-item-title">No Repeated Characters</span>
+                                    <span class="check-item-desc">No 3+ consecutive repeats</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Policy Compliance Glass Card -->
+                    <section class="glass-card panel-card">
+                        <div class="panel-header">
+                            <div class="panel-title-group">
+                                <div class="header-icon-pill icon-purple">
+                                    <i data-lucide="file-check-2"></i>
+                                </div>
+                                <h2>Password Policy</h2>
+                            </div>
+                            <span id="policyStatusBadge" class="header-status-tag tag-fail">POLICY FAIL</span>
+                        </div>
+
+                        <div class="policy-table">
+                            <div class="policy-row">
+                                <span>Minimum Length (&ge;12)</span>
+                                <span id="policyLen" class="policy-state fail">No</span>
+                            </div>
+                            <div class="policy-row">
+                                <span>Uppercase & Lowercase</span>
+                                <span id="policyCasing" class="policy-state fail">No</span>
+                            </div>
+                            <div class="policy-row">
+                                <span>Numbers & Special Symbols</span>
+                                <span id="policyChars" class="policy-state fail">No</span>
+                            </div>
+                            <div class="policy-row">
+                                <span>Blacklist & Pattern Safety</span>
+                                <span id="policySafety" class="policy-state pass">Yes</span>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Right Column: Recommendations & Generator -->
+                <div class="column-stack">
+                    
+                    <!-- Recommendations Panel -->
+                    <section class="glass-card panel-card">
+                        <div class="panel-header">
+                            <div class="panel-title-group">
+                                <div class="header-icon-pill icon-cyan">
+                                    <i data-lucide="sparkles"></i>
+                                </div>
+                                <h2>AI Recommendations</h2>
+                            </div>
+                        </div>
+
+                        <div id="suggestionsList" class="recommendations-stack">
+                            <div class="recommendation-card placeholder-card">
+                                <div class="rec-icon"><i data-lucide="info"></i></div>
+                                <div class="rec-body">
+                                    <span class="rec-title">Awaiting Input</span>
+                                    <span class="rec-desc">Type or generate a password above to receive intelligent recommendations.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Password Generator Section -->
+                    <section class="glass-card panel-card generator-panel" id="generatorSection">
+                        <div class="panel-header">
+                            <div class="panel-title-group">
+                                <div class="header-icon-pill icon-blue">
+                                    <i data-lucide="refresh-cw"></i>
+                                </div>
+                                <h2>Password Generator</h2>
+                            </div>
+                            <span class="gen-badge">HIGH ENTROPY</span>
+                        </div>
+
+                        <div class="generator-controls">
+                            
+                            <!-- Slider Control -->
+                            <div class="slider-box">
+                                <div class="slider-label-row">
+                                    <span>Password Length:</span>
+                                    <span id="lengthDisplay" class="slider-val-badge">16 Characters</span>
+                                </div>
+                                <input type="range" id="lengthSlider" min="12" max="20" value="16" class="custom-range-slider">
+                            </div>
+
+                            <!-- Animated Options Toggles -->
+                            <div class="toggles-grid">
+                                <label class="toggle-chip active">
+                                    <input type="checkbox" checked disabled>
+                                    <i data-lucide="check"></i>
+                                    <span>Uppercase (A-Z)</span>
+                                </label>
+                                <label class="toggle-chip active">
+                                    <input type="checkbox" checked disabled>
+                                    <i data-lucide="check"></i>
+                                    <span>Lowercase (a-z)</span>
+                                </label>
+                                <label class="toggle-chip active">
+                                    <input type="checkbox" checked disabled>
+                                    <i data-lucide="check"></i>
+                                    <span>Numbers (0-9)</span>
+                                </label>
+                                <label class="toggle-chip active">
+                                    <input type="checkbox" checked disabled>
+                                    <i data-lucide="check"></i>
+                                    <span>Symbols (!@#$)</span>
+                                </label>
+                            </div>
+
+                            <!-- Output Box & Actions -->
+                            <div class="generator-action-row">
+                                <button id="generateBtn" class="action-btn primary-gradient-btn">
+                                    <i data-lucide="wand-2"></i>
+                                    <span>Generate Password</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- Password Statistics Section -->
+                    <section class="glass-card panel-card">
+                        <div class="panel-header">
+                            <div class="panel-title-group">
+                                <div class="header-icon-pill icon-green">
+                                    <i data-lucide="bar-chart-3"></i>
+                                </div>
+                                <h2>Password Statistics</h2>
+                            </div>
+                        </div>
+
+                        <div class="stats-mini-grid">
+                            <div class="stat-mini-box">
+                                <span class="stat-mini-label">Character Pool</span>
+                                <span id="statPoolSize" class="stat-mini-val">0 Chars</span>
+                            </div>
+                            <div class="stat-mini-box">
+                                <span class="stat-mini-label">Est. Guesses</span>
+                                <span id="statGuesses" class="stat-mini-val">0</span>
+                            </div>
+                            <div class="stat-mini-box">
+                                <span class="stat-mini-label">Complexity</span>
+                                <span id="statComplexity" class="stat-mini-val">Low</span>
+                            </div>
+                            <div class="stat-mini-box">
+                                <span class="stat-mini-label">Repeat Rate</span>
+                                <span id="statRepeatRate" class="stat-mini-val">0%</span>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
 
             </div>
 
         </main>
 
         <!-- Footer -->
-        <footer class="app-footer">
-            <p>PassGuard &copy; 2026. Enterprise Password Security & Real-Time Analyzer.</p>
+        <footer class="app-footer-glass">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i data-lucide="shield-check"></i>
+                    <span>PassGuard Security Suite &copy; 2026</span>
+                </div>
+                <div class="footer-links">
+                    <span>Privacy-First Zero Knowledge Architecture</span>
+                </div>
+            </div>
         </footer>
 
     </div>
 
-    <!-- History Drawer / Modal -->
-    <div id="historyModal" class="modal-backdrop hidden">
-        <div class="glass-card modal-content">
-            <div class="modal-header">
-                <div class="modal-title">
+    <!-- Slide-Over Analysis History Panel (Drawer) -->
+    <div id="historyModal" class="drawer-backdrop hidden">
+        <aside class="drawer-panel">
+            <div class="drawer-header">
+                <div class="drawer-title">
                     <i data-lucide="history"></i>
-                    <h2>Analysis History</h2>
+                    <div>
+                        <h3>Analysis History Log</h3>
+                        <p class="drawer-sub">SHA-256 Hashes logged securely in SQLite</p>
+                    </div>
                 </div>
-                <button id="closeModalBtn" class="icon-btn close-btn">
+                <button id="closeModalBtn" class="icon-close-btn" aria-label="Close Drawer">
                     <i data-lucide="x"></i>
                 </button>
             </div>
-            
-            <div class="modal-body">
-                <p class="privacy-note">
-                    <i data-lucide="shield"></i>
-                    Plaintext passwords are never stored. Only SHA-256 cryptographic hashes are logged.
-                </p>
 
-                <div class="history-table-wrapper">
-                    <table class="history-table">
+            <div class="drawer-search-bar">
+                <i data-lucide="search"></i>
+                <input type="text" id="historySearchInput" placeholder="Filter by hash or score...">
+            </div>
+
+            <div class="drawer-body">
+                <div class="table-container-glass">
+                    <table class="history-table-pro">
                         <thead>
                             <tr>
                                 <th>SHA-256 Hash</th>
@@ -257,26 +547,34 @@
                         </thead>
                         <tbody id="historyTableBody">
                             <tr>
-                                <td colspan="4" class="empty-state">No analysis records found.</td>
+                                <td colspan="4" class="empty-table-state">
+                                    <i data-lucide="inbox"></i>
+                                    <span>No analysis history logged yet.</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <button id="clearHistoryBtn" class="glass-btn btn-danger">
+            <div class="drawer-footer">
+                <button id="clearHistoryBtn" class="drawer-btn btn-danger-glow">
                     <i data-lucide="trash-2"></i>
-                    <span>Clear History</span>
+                    <span>Clear Analysis History</span>
                 </button>
             </div>
-        </div>
+        </aside>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toastNotification" class="toast hidden">
-        <i data-lucide="check-circle" class="toast-icon"></i>
-        <span id="toastMessage">Copied Successfully!</span>
+    <!-- Toast Notification Container -->
+    <div id="toastNotification" class="toast-pro hidden">
+        <div class="toast-icon-box">
+            <i data-lucide="check-circle-2"></i>
+        </div>
+        <div class="toast-content">
+            <span id="toastMessage">Copied Successfully!</span>
+            <div class="toast-progress"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
