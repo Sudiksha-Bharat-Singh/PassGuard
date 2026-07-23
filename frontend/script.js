@@ -475,8 +475,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getStrengthClass(strengthStr) {
-        switch (strengthStr.toLowerCase()) {
-            case 'very strong': return 'very-strong';
+        switch ((strengthStr || '').toLowerCase()) {
+            case 'excellent':
+            case 'very strong': return 'excellent';
             case 'strong': return 'strong';
             case 'medium': return 'medium';
             default: return 'weak';

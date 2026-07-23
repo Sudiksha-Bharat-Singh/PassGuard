@@ -173,7 +173,7 @@ def analyze_password(password: str) -> dict:
 
     # Determine Strength Label
     if total_score >= 85:
-        strength = "Very Strong"
+        strength = "Excellent"
     elif total_score >= 65:
         strength = "Strong"
     elif total_score >= 40:
