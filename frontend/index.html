@@ -277,8 +277,8 @@
                                     <i data-lucide="circle"></i>
                                 </div>
                                 <div class="check-item-content">
-                                    <span class="check-item-title">Minimum Length</span>
-                                    <span class="check-item-desc">At least 12 characters long</span>
+                                    <span class="check-item-title">Minimum 8 Characters (Required)</span>
+                                    <span class="check-item-desc">At least 8 characters long (12+ Recommended)</span>
                                 </div>
                             </div>
 
@@ -358,20 +358,36 @@
 
                         <div class="policy-table">
                             <div class="policy-row">
-                                <span>Minimum Length (&ge;12)</span>
+                                <span>Minimum 8 Characters (Required)</span>
                                 <span id="policyLen" class="policy-state fail">No</span>
                             </div>
                             <div class="policy-row">
-                                <span>Uppercase & Lowercase</span>
-                                <span id="policyCasing" class="policy-state fail">No</span>
+                                <span>12+ Characters (Recommended)</span>
+                                <span id="policyRecLen" class="policy-state fail">No</span>
                             </div>
                             <div class="policy-row">
-                                <span>Numbers & Special Symbols</span>
-                                <span id="policyChars" class="policy-state fail">No</span>
+                                <span>Uppercase Letter</span>
+                                <span id="policyUpper" class="policy-state fail">No</span>
                             </div>
                             <div class="policy-row">
-                                <span>Blacklist & Pattern Safety</span>
-                                <span id="policySafety" class="policy-state pass">Yes</span>
+                                <span>Lowercase Letter</span>
+                                <span id="policyLower" class="policy-state fail">No</span>
+                            </div>
+                            <div class="policy-row">
+                                <span>Number</span>
+                                <span id="policyNum" class="policy-state fail">No</span>
+                            </div>
+                            <div class="policy-row">
+                                <span>Special Character</span>
+                                <span id="policySpec" class="policy-state fail">No</span>
+                            </div>
+                            <div class="policy-row">
+                                <span>No Common Password</span>
+                                <span id="policyCommon" class="policy-state pass">Yes</span>
+                            </div>
+                            <div class="policy-row">
+                                <span>No Repeated Characters</span>
+                                <span id="policyRepeated" class="policy-state pass">Yes</span>
                             </div>
                         </div>
                     </section>
@@ -423,7 +439,7 @@
                                     <span>Password Length:</span>
                                     <span id="lengthDisplay" class="slider-val-badge">16 Characters</span>
                                 </div>
-                                <input type="range" id="lengthSlider" min="12" max="20" value="16" class="custom-range-slider">
+                                <input type="range" id="lengthSlider" min="8" max="20" value="16" class="custom-range-slider">
                             </div>
 
                             <!-- Animated Options Toggles -->

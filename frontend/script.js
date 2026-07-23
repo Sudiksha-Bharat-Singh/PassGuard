@@ -43,9 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const policyStatusBadge = document.getElementById('policyStatusBadge');
     const policyLen = document.getElementById('policyLen');
-    const policyCasing = document.getElementById('policyCasing');
-    const policyChars = document.getElementById('policyChars');
-    const policySafety = document.getElementById('policySafety');
+    const policyRecLen = document.getElementById('policyRecLen');
+    const policyUpper = document.getElementById('policyUpper');
+    const policyLower = document.getElementById('policyLower');
+    const policyNum = document.getElementById('policyNum');
+    const policySpec = document.getElementById('policySpec');
+    const policyCommon = document.getElementById('policyCommon');
+    const policyRepeated = document.getElementById('policyRepeated');
 
     const suggestionsList = document.getElementById('suggestionsList');
     

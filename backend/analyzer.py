@@ -185,7 +185,7 @@ def analyze_password(password: str) -> dict:
 
     # Checklist
     checklist = {
-        "min_length": length >= 12,
+        "min_length": length >= 8,
         "uppercase": has_upper,
         "lowercase": has_lower,
         "numbers": has_number,
@@ -198,8 +198,11 @@ def analyze_password(password: str) -> dict:
     suggestions = []
     if is_common:
         suggestions.append("Critical: This password matches a known common pattern. Avoid dictionary words.")
-    if length < 12:
-        suggestions.append(f"Increase length by {12 - length} more character{'s' if 12 - length > 1 else ''} (recommended ≥ 16).")
+    if length < 8:
+        diff = 8 - length
+        suggestions.append(f"Increase length by {diff} more character{'s' if diff > 1 else ''}.")
+    elif 8 <= length < 12:
+        suggestions.append("Good password length. For stronger security, consider using 12 or more characters.")
     if not has_upper:
         suggestions.append("Add at least one uppercase letter (A-Z).")
     if not has_lower:
@@ -236,7 +239,7 @@ def analyze_password(password: str) -> dict:
     }
 
 def generate_secure_password(length: int = 16) -> str:
-    length = max(12, min(20, length))
+    length = max(8, min(20, length))
     
     uppers = string.ascii_uppercase
     lowers = string.ascii_lowercase
@@ -248,7 +251,6 @@ def generate_secure_password(length: int = 16) -> str:
         random.choice(uppers),
         random.choice(lowers),
         random.choice(digits),
-        random.choice(specials),
         random.choice(specials)
     ]
     
