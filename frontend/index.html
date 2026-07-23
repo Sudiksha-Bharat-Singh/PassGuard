@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassGuard - Premium Password Strength Analyzer</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Ambient Glow Effects -->
+    <div class="glow-sphere sphere-1"></div>
+    <div class="glow-sphere sphere-2"></div>
+    <div class="cyber-grid"></div>
+
+    <!-- Application Shell -->
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">PassGuard</span>
+                    <span class="brand-badge">PRO ANALYZER</span>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <button id="historyBtn" class="glass-btn btn-secondary">
+                    <i data-lucide="history"></i>
+                    <span>Analysis History</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="tagline-pill">
+                    <i data-lucide="lock"></i>
+                    <span>Analyze. Strengthen. Secure.</span>
+                </div>
+                <h1 class="hero-title">PassGuard</h1>
+                <p class="hero-subtitle">Analyze your password before hackers do.</p>
+            </section>
+
+            <!-- Main Analyzer Card -->
+            <section class="glass-card main-analyzer-card">
+                
+                <!-- Re-analyzed Alert Banner -->
+                <div id="reanalyzedBanner" class="banner banner-warning hidden">
+                    <i data-lucide="alert-triangle"></i>
+                    <span>This password has been analyzed previously.</span>
+                </div>
+
+                <!-- Input Group -->
+                <div class="input-wrapper">
+                    <label for="passwordInput" class="input-label">Enter Password to Analyze</label>
+                    <div class="input-container">
+                        <i data-lucide="key-round" class="input-icon"></i>
+                        <input 
+                            type="password" 
+                            id="passwordInput" 
+                            placeholder="Type or paste your password..." 
+                            autocomplete="off" 
+                            spellcheck="false"
+                        >
+                        <button type="button" id="togglePasswordBtn" class="icon-btn" title="Show / Hide Password">
+                            <i data-lucide="eye" id="eyeIcon"></i>
+                        </button>
+                        <button type="button" id="copyInputBtn" class="icon-btn" title="Copy Password">
+                            <i data-lucide="copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Strength Meter Bar -->
+                <div class="strength-meter-section">
+                    <div class="strength-header">
+                        <div class="strength-label-group">
+                            <span class="meta-title">Security Level:</span>
+                            <span id="strengthLabel" class="strength-badge weak">Weak</span>
+                        </div>
+                        <div class="strength-score-group">
+                            <span class="meta-title">Score:</span>
+                            <span id="scoreValue" class="score-number">0</span>
+                            <span class="score-max">/100</span>
+                        </div>
+                    </div>
+                    
+                    <div class="meter-track">
+                        <div id="meterFill" class="meter-fill weak" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Metrics Dashboard Grid -->
+                <div class="metrics-grid">
+                    
+                    <!-- Crack Time Card -->
+                    <div class="metric-card">
+                        <div class="metric-icon crack-icon">
+                            <i data-lucide="clock"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Estimated Crack Time</span>
+                            <span id="crackTimeValue" class="metric-value">Instant</span>
+                        </div>
+                    </div>
+
+                    <!-- Entropy Card -->
+                    <div class="metric-card">
+                        <div class="metric-icon entropy-icon">
+                            <i data-lucide="cpu"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Entropy Score</span>
+                            <span id="entropyValue" class="metric-value">0.0 bits</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Grid Layout for Checklist & Generator -->
+            <div class="two-column-grid">
+                
+                <!-- Security Checklist Card -->
+                <section class="glass-card checklist-card">
+                    <div class="card-header">
+                        <i data-lucide="list-checks" class="card-header-icon"></i>
+                        <h2>Security Checklist</h2>
+                    </div>
+                    <ul class="checklist-list">
+                        <li id="check-length" class="check-item">
+                            <i data-lucide="circle" class="check-icon"></i>
+                            <span>Minimum 12 Characters</span>
+                        </li>
+                        <li id="check-upper" class="check-item">
+                            <i data-lucide="circle" class="check-icon"></i>
+                            <span>Uppercase Letters (A-Z)</span>
+                        </li>
+                        <li id="check-lower" class="check-item">
+                            <i data-lucide="circle" class="check-icon"></i>
+                            <span>Lowercase Letters (a-z)</span>
+                        </li>
+                        <li id="check-number" class="check-item">
+                            <i data-lucide="circle" class="check-icon"></i>
+                            <span>Numeric Digits (0-9)</span>
+                        </li>
+                        <li id="check-special" class="check-item">
+                            <i data-lucide="circle" class="check-icon"></i>
+                            <span>Special Characters (!@#$)</span>
+                        </li>
+                        <li id="check-common" class="check-item">
+                            <i data-lucide="circle" class="check-icon"></i>
+                            <span>No Common Password Pattern</span>
+                        </li>
+                        <li id="check-repeated" class="check-item">
+                            <i data-lucide="circle" class="check-icon"></i>
+                            <span>No Repeated Characters</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Dynamic Suggestions & Generator Card -->
+                <section class="glass-card action-card">
+                    
+                    <!-- Suggestions Panel -->
+                    <div class="suggestions-container">
+                        <div class="card-header">
+                            <i data-lucide="sparkles" class="card-header-icon"></i>
+                            <h2>Recommendations</h2>
+                        </div>
+                        <div id="suggestionsList" class="suggestions-list">
+                            <p class="suggestion-placeholder">Type a password above to receive intelligent recommendations.</p>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Password Generator -->
+                    <div class="generator-container">
+                        <div class="card-header">
+                            <i data-lucide="refresh-cw" class="card-header-icon"></i>
+                            <h2>Password Generator</h2>
+                        </div>
+                        
+                        <div class="slider-control">
+                            <div class="slider-header">
+                                <label for="lengthSlider">Length:</label>
+                                <span id="lengthDisplay" class="length-badge">16 chars</span>
+                            </div>
+                            <input type="range" id="lengthSlider" min="12" max="20" value="16" class="glass-slider">
+                        </div>
+
+                        <button id="generateBtn" class="glass-btn btn-primary btn-block">
+                            <i data-lucide="wand-2"></i>
+                            <span>Generate Secure Password</span>
+                        </button>
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>PassGuard &copy; 2026. Enterprise Password Security & Real-Time Analyzer.</p>
+        </footer>
+
+    </div>
+
+    <!-- History Drawer / Modal -->
+    <div id="historyModal" class="modal-backdrop hidden">
+        <div class="glass-card modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i data-lucide="history"></i>
+                    <h2>Analysis History</h2>
+                </div>
+                <button id="closeModalBtn" class="icon-btn close-btn">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <p class="privacy-note">
+                    <i data-lucide="shield"></i>
+                    Plaintext passwords are never stored. Only SHA-256 cryptographic hashes are logged.
+                </p>
+
+                <div class="history-table-wrapper">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>SHA-256 Hash</th>
+                                <th>Score</th>
+                                <th>Strength</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <tr>
+                                <td colspan="4" class="empty-state">No analysis records found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="clearHistoryBtn" class="glass-btn btn-danger">
+                    <i data-lucide="trash-2"></i>
+                    <span>Clear History</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast hidden">
+        <i data-lucide="check-circle" class="toast-icon"></i>
+        <span id="toastMessage">Copied Successfully!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
